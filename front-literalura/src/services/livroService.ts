@@ -3,10 +3,19 @@ import axios from "axios";
 
 export interface Livro {
   id?: number;
-  titulo: string;
-  autor: string;
-  idioma: string;
-  numeroDownloads: number;
+  title: string;
+  authors: Autor[];
+  languages: string[];
+  download_count: number;
+  imagem: string;
+  resumo: string;
+  genero: string;
+}
+
+export interface Autor {
+  name: string;
+  birth_year?: number;
+  death_year?: number;
 }
 
 export interface EstatisticasDownload {

@@ -6,33 +6,37 @@ interface BookCardProps {
 }
 
 const BookCard = ({ livro }: BookCardProps) => {
-  return (
-    /* 1. A Caixa Principal (O Vidro) */
-    <div className="glass-card">
+  // O nome do autor ainda é uma lista no seu JSON, então pegamos o primeiro
+  const nomeAutor = livro.authors.length > 0 ? livro.authors[0].name : "Autor desconhecido";
 
-      {/* 2. Sub-caixa da Esquerda (A Capa) */}
+  return (
+    <div className="glass-card">
       <div className="card-image">
+        {/* Acesso direto e limpo! */}
         <img
-          src="https://via.placeholder.com/120x180"
-          alt={`Capa do livro ${livro.titulo}`}
+          src={livro.imagem || "https://via.placeholder.com/120x180"}
+          alt={`Capa do livro ${livro.title}`}
         />
       </div>
 
-      {/* 3. Sub-caixa da Direita (Os Textos) */}
       <div className="card-info">
-        <h2>{livro.titulo}</h2>
-        <p className="author">Autor: {livro.autor}</p>
+        <div className="card-header">
+          {livro.genero && <span className="genre-tag">{livro.genero}</span>}
+          <h2>{livro.title}</h2>
+          <p className="author">{nomeAutor}</p>
+        </div>
 
-        {/* Uma mini-caixa para os dados técnicos */}
+        {livro.resumo && (
+          <p className="summary-preview">{livro.resumo}</p>
+        )}
+
         <div className="card-stats">
-          <span>🌐 {livro.idioma}</span>
-          <span>📥 {livro.numeroDownloads}</span>
+          <span>🌐 {livro.languages[0]?.toUpperCase()}</span>
+          <span>📥 {livro.download_count.toLocaleString()}</span>
         </div>
       </div>
-
     </div>
   );
 };
-
 
 export default BookCard;

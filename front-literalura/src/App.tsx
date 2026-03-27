@@ -2,7 +2,7 @@ import BookCard from "./components/books/BookCard";
 import { useEffect, useState } from "react";
 import { livroService, type Livro } from "./services/livroService";
 import "./styles/global.css";
-
+import SearchBar from "./components/books/SearchBar";
 
 function App() {
   // 1. Criamos a "memória" para guardar os livros. Começa como uma lista vazia [].
@@ -25,10 +25,25 @@ function App() {
     buscarDados();
   }, []); // Os colchetes vazios [] garantem que ele só rode ao abrir a página
 
+  // Função disparada pela SearchBar
+  const handleSearch = async (titulo: string) => {
+    setCarregando(true);
+    try {
+      const resultado = await livroService.buscarPorTitulo(titulo);
+      // Como o buscarPorTitulo retorna apenas 1 livro (ou erro), 
+      // colocamos ele dentro de uma lista [resultado] para o .map funcionar
+      setLivros([resultado]);
+    } catch (error) {
+      alert("Livro não encontrado ou erro na API!");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   return (
     <div className="app-container">
       <h1>📚 Literalura - Top 10</h1>
-
+      <SearchBar onSearch={handleSearch} />
       {carregando ? (
         <p>Preparando a biblioteca...</p>
       ) : (

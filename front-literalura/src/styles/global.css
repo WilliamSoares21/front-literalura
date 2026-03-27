@@ -1,0 +1,89 @@
+/* 1. O Fundo da Página (Onde o vidro vai brilhar) */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Um roxo/azul suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 2. O Card de Vidro */
+.glass-card {
+  display: flex;
+  /* Alinha imagem e info lado a lado */
+  width: 450px;
+  padding: 20px;
+  gap: 20px;
+
+  /* --- REGRAS DO GLASSMORPHISM --- */
+  background: rgba(255, 255, 255, 0.15);
+  /* Branco bem transparente */
+  backdrop-filter: blur(12px);
+  /* O efeito de "vidro jateado" */
+  -webkit-backdrop-filter: blur(12px);
+  /* Compatibilidade para Safari */
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Borda fina que parece o reflexo da quina do vidro */
+  border-radius: 16px;
+  /* Cantos arredondados modernos */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  /* Sombra suave para dar profundidade */
+  /* ------------------------------- */
+
+  color: white;
+  /* Texto branco para contrastar com o fundo escuro */
+}
+
+/* 3. Ajuste da Imagem */
+.card-image img {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  /* Garante que a imagem não estique */
+}
+
+/* 4. Organização dos Textos */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  /* Sombra no texto para facilitar a leitura */
+}
+
+.author {
+  margin: 0 0 16px 0;
+  opacity: 0.8;
+  /* Deixa o autor um pouco mais discreto */
+}
+
+.card-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.app-container {
+  padding: 40px;
+  text-align: center;
+}
+
+.books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  /* Faz os cards pularem para a linha de baixo se não couberem */
+  justify-content: center;
+  gap: 30px;
+  /* Espaço entre os cards de vidro */
+  margin-top: 30px;
+}
